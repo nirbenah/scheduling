@@ -113,7 +113,7 @@ def get_top_number(p_vals: List[List[int]]):
     return sum([sum(row) for row in p_vals])
 
 
-
+#old method to find max:
 def max_sum_line(p_vals: List[List[int]]) -> int:
     # Initialize the maximum sum to be very small
     max_sum = float('-inf')
@@ -128,12 +128,20 @@ def max_sum_line(p_vals: List[List[int]]) -> int:
     
     return max_sum
 
+# greedy method to find max:
+def greedy_max(p_vals: List[List[int]]):
+    #gets transposed mat JxM
+    machines = [0] * len(p_vals[0]) 
+    for item in p_vals: # a line - machine
+        machines[item.index(min(item))] += min(item)
+    return max(machines)
+
 class MaxSatSolver:
     def __init__(self, p_vals: List[List[int]]):
         self.p_vals = copy.deepcopy(p_vals)
         self.M = len(p_vals)
         self.J = len(p_vals[0])
-        self.MAX = max_sum_line(self.p_vals)
+        self.MAX = greedy_max(transpose(self.p_vals))
         self.r = [[0 for _ in range(self.J)] for _ in range(self.M)]
         self.q = [[0 for _ in range(self.MAX)] for _ in range(self.M)]
         self.s = [[0 for _ in range(self.MAX)] for _ in range(self.J)]
