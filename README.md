@@ -15,4 +15,11 @@ Scipy works well with python 3 (not conda) <br />
 for example the simple test with the approx solution (scipy) does not work well with conda interpeter - the graph is built with too many edges <br />
 but it works very well with /bin/python3 <br /> <br />
 
-that's why sometimes the import pulp in comment, because when I use /bin/python3 it does not recognize pulp 
+that's why sometimes the import pulp in comment, because when I use /bin/python3 it does not recognize pulp <br /> <br />
+
+in real_exact.py (the ilp exact solver), there is a useful option to achieve better time: <br>
+change from: <br>
+&emsp; lp_problem.solve(solver) <br>
+to: <br>
+&emsp; solver = pulp.PULP_CBC_CMD(timeLimit=TIME_LIMIT_YOU_WANT) <br>
+&emsp; lp_problem.solve(solver)
